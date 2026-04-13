@@ -28,6 +28,8 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+/data/schedule/*
+
 /public/assets
 
 # Ignore key files for decrypting credentials and more.
