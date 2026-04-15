@@ -8,3 +8,9 @@
 
   <%= button_to "Destroy this route", @route, method: :delete %>
 </div>
+
+<p>There are <%= @vehicles.count %> vehicles currently on this route</p>
+
+<% @vehicles.each do |vehicle| %>
+  <p><%= vehicle %></p>
+<% end %>
