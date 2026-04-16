@@ -1,7 +1,7 @@
 require 'google/transit/gtfs-realtime.pb'
 
 class Vehicle
-    attr_accessor :id, :trip_id, :route_id, :current_stop_sequence, :current_status, :timestamp, :stop_id
+    attr_accessor :id, :trip_id, :route_id, :current_stop_sequence, :current_status, :timestamp, :stop_id, :lat, :lon, :bearing, :speed
     @@url = "https://bustime.ttc.ca/gtfsrt/vehicles"
     @@timestamp = 0
     @@vehicles = []
@@ -12,7 +12,7 @@ class Vehicle
         2 => 'stopped at'
     }.freeze
 
-    def initialize(id, trip_id, route_id, current_stop_sequence, current_status, timestamp, stop_id)
+    def initialize(id, trip_id, route_id, current_stop_sequence, current_status, timestamp, stop_id, lat, lon, bearing, speed)
         @id = id
         @trip_id = trip_id
         @route_id = route_id
@@ -20,10 +20,14 @@ class Vehicle
         @current_status = current_status
         @timestamp = timestamp
         @stop_id = stop_id
+        @lat = lat.round(6)
+        @lon = lon.round(6)
+        @bearing = bearing.round(0)
+        @speed = speed.round(1)
     end
 
     def to_s
-        "Vehicle number #{self.id}, on route #{self.route_id}, is #{self.current_status} #{Stop.find_by(id: self.stop_id)&.name || 'no info'}"
+        "Vehicle #{self.id}, on route #{self.route_id}, is #{self.current_status} #{Stop.find_by(id: self.stop_id)&.name || 'no info'}, at #{self.speed} km/hr"
         # Vehicle number #{self.id}, on route #{self.route_id}, is #{self.current_status}
     end
 
@@ -44,7 +48,7 @@ class Vehicle
             if entity.field?(:vehicle)
                 info = entity.vehicle
                 next unless info.field?(:trip)
-                @@vehicles.push(Vehicle.new(info.vehicle.id, info.trip.trip_id, info.trip.route_id, info.current_stop_sequence, STATUS_NAMES[info.current_status], info.timestamp, info.stop_id))
+                @@vehicles.push(Vehicle.new(info.vehicle.id, info.trip.trip_id, info.trip.route_id, info.current_stop_sequence, STATUS_NAMES[info.current_status], info.timestamp, info.stop_id, info.position.latitude, info.position.longitude, info.position.bearing, info.position.speed))
             end
         end
         @@vehicles
