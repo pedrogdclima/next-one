@@ -66,3 +66,13 @@ group :test do
 end
 
 gem "csv", "~> 3.3"
+
+gem "protobuf", "~> 3.10"
+
+gem "uri", "~> 1.1"
+
+gem "net", "~> 0.3.3"
+
+gem "gtfs-realtime-bindings", "~> 0.0.5"
+
+gem "net-http", "~> 0.9.1"
