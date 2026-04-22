@@ -10,12 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_10_171023) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_20_183220) do
+  create_table "points", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.decimal "dist_travelled"
+    t.decimal "lat"
+    t.decimal "lon"
+    t.decimal "sequence"
+    t.string "shape_id"
+    t.datetime "updated_at", null: false
+    t.index ["shape_id"], name: "index_points_on_shape_id"
+  end
+
   create_table "routes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "long_name"
     t.string "mode_type"
     t.string "short_name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shapes", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
@@ -26,5 +42,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_10_171023) do
     t.string "lon"
     t.string "name"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "trips", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "direction_id"
+    t.string "headsign"
+    t.integer "route_id"
+    t.integer "service_id"
+    t.string "shape_id"
+    t.string "short_name"
+    t.datetime "updated_at", null: false
+    t.index ["shape_id"], name: "index_trips_on_shape_id"
   end
 end

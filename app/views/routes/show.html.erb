@@ -25,10 +25,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-const vehicles = <%= @vehicles.map{|vehicle| [vehicle.lat, vehicle.lon]}.to_json %>
+const vehicles = <%== @vehicles.map{|vehicle| [vehicle.lat, vehicle.lon]}.to_json %>;
 vehicles.forEach( function (vehicle) {
   L.marker(vehicle).addTo(map);
 });
+
+const shapes = <%== @shapes.to_json %>;
+L.polyline(shapes, {color: 'red'}).addTo(map);
 </script>
 
 <% @vehicles.each do |vehicle| %>

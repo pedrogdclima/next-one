@@ -9,6 +9,7 @@ class RoutesController < ApplicationController
   # GET /routes/1 or /routes/1.json
   def show
     @vehicles = Vehicle.on_route(@route.id)
+    @shapes = Shape.for_vehicles(@vehicles)
   end
 
   # GET /routes/new
