@@ -1,15 +1,35 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: %i[ show edit update destroy ]
+  before_action :set_route, only: %i[ show edit update destroy save_route ]
 
   # GET /routes or /routes.json
   def index
     @routes = Route.all
+    @saved_routes = session[:saved_routes] || []
   end
 
   # GET /routes/1 or /routes/1.json
   def show
     @vehicles = Vehicle.on_route(@route.id)
     @shapes = Shape.for_vehicles(@vehicles)
+    @is_saved = route_saved?(@route.id)
+  end
+
+  # POST /routes/1/save_route
+  def save
+    session[:saved_routes] ||= []
+    
+    if session[:saved_routes].include?(@route.id)
+      session[:saved_routes].delete(@route.id)
+      message = "Route removed from saved routes."
+    else
+      session[:saved_routes] << @route.id
+      message = "Route saved successfully!"
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @route, notice: message }
+      format.turbo_stream
+    end
   end
 
   # GET /routes/new
@@ -68,5 +88,10 @@ class RoutesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def route_params
       params.expect(route: [ :id, :short_name, :long_name, :type ])
+    end
+
+    # Check if a route is saved in the current session
+    def route_saved?(route_id)
+      (session[:saved_routes] || []).include?(route_id)
     end
 end

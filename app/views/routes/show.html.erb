@@ -7,10 +7,11 @@
 <%= render @route %>
 
 <div>
-  <%= link_to "Edit this route", edit_route_path(@route) %> |
-  <%= link_to "Back to routes", routes_path %>
-
-  <%= button_to "Destroy this route", @route, method: :delete %>
+  <%= link_to "Back", routes_path %>
+  
+  <% button_class = @is_saved ? "saved-button" : "" %>
+  <% button_text = @is_saved ? "Forget Route" : "Save Route" %>
+  <%= button_to button_text, save_route_path(@route), method: :post, class: button_class %>
 </div>
 
 <p>There are <%= @vehicles.count %> vehicles currently on this route</p>

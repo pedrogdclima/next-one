@@ -4,6 +4,25 @@
 
 <h1>Routes</h1>
 
+<% if @saved_routes.any? %>
+  <div id="saved-routes">
+    <h2>Your Saved Routes</h2>
+    <div id="saved-routes-list">
+      <% @saved_routes.each do |route_id| %>
+        <% route = Route.find(route_id) %>
+        <%= render route %>
+        <p>
+          <%= link_to "Show this route", route %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+<% end %>
+
+<h2>All Routes</h2>
+
 <div id="routes">
   <% @routes.each do |route| %>
     <%= render route %>
