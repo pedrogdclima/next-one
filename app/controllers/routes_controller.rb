@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :set_route, only: %i[ show edit update destroy save_route ]
+  before_action :set_route, only: %i[ show edit update destroy save ]
 
   # GET /routes or /routes.json
   def index
