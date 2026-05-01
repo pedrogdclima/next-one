@@ -27,8 +27,7 @@ class Vehicle
     end
 
     def to_s
-        "Vehicle #{self.id}, on route #{self.route_id}, is #{self.current_status} #{Stop.find_by(id: self.stop_id)&.name || 'no info'}, at #{self.speed} km/hr"
-        # Vehicle number #{self.id}, on route #{self.route_id}, is #{self.current_status}
+        "#{self.id} is #{self.current_status} #{Stop.find_by(id: self.stop_id)&.name || 'no info'}, at #{self.speed} km/hr"
     end
 
     def self.on_route(route_id)
