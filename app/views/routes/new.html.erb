@@ -1,11 +1,12 @@
-<% content_for :title, "New route" %>
+<% content_for :title, "New Route" %>
 
-<h1>New route</h1>
+<div class="container-content-max space-section">
+  <div>
+    <h1 class="page-title">Create New Route</h1>
+    <p class="page-description">Add a new transit route to the system</p>
+  </div>
 
-<%= render "form", route: @route %>
-
-<br>
-
-<div>
-  <%= link_to "Back to routes", routes_path %>
+  <div class="card-lg">
+    <%= render "form", route: @route %>
+  </div>
 </div>

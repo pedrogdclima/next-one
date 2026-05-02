@@ -1,11 +1,12 @@
-<% content_for :title, "New stop" %>
+<% content_for :title, "New Stop" %>
 
-<h1>New stop</h1>
+<div class="container-content-max space-section">
+  <div>
+    <h1 class="page-title">Create New Stop</h1>
+    <p class="page-description">Add a new transit stop to the system</p>
+  </div>
 
-<%= render "form", stop: @stop %>
-
-<br>
-
-<div>
-  <%= link_to "Back to stops", stops_path %>
+  <div class="card-lg">
+    <%= render "form", stop: @stop %>
+  </div>
 </div>

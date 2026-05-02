@@ -1,27 +1,73 @@
+<%# content_for :title, "#{@route.short_name} - #{@route.long_name}" %>
 
+<div class="space-section">
+  <!-- Route Header -->
+  <div class="card-lg">
+    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div>
+        <h1 class="page-title"><%= "#{@route.short_name} - #{@route.long_name}" %></h1>
+      </div>
+      <div class="btn-group flex-col">
+        <%= link_to "Back to Routes", routes_path, class: "btn-secondary" %>
+        <% button_class = "btn " + (@is_saved ? "btn-saved" : "btn-primary") %>
+        <% button_text = @is_saved ? "❤ Saved" : "♡ Save Route" %>
+        <%= button_to button_text, save_route_path(@route), method: :post, class: button_class %>
+      </div>
+    </div>
+  </div>
 
-<p style="color: green"><%= notice %></p>
+  <!-- Map Section -->
+  <div class="card-lg overflow-hidden">
+    <h2 class="section-title mb-4">Route Map</h2>
+    <div 
+      id="map" 
+      class="map-responsive"
+      data-controller="map"
+      data-vehicles="<%= @vehicles.map{|vehicle| [vehicle.lat, vehicle.lon]}.to_json %>"
+      data-shapes="<%= @shapes.to_json %>"
+    ></div>
+  </div>
 
-<%= render @route %>
+  <!-- Active Vehicles Section -->
+  <div class="card-lg">
+    <div class="flex items-center mb-4">
+      <svg class="section-title-icon" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M13 7H7v6h6V7z"></path>
+      </svg>
+      <h2 class="section-title">Active Vehicles</h2>
+      <span class="badge-count">
+        <%= @vehicles.count %>
+      </span>
+    </div>
 
-<div>
-  <%= link_to "Back", routes_path %>
-  
-  <% button_class = @is_saved ? "saved-button" : "" %>
-  <% button_text = @is_saved ? "Forget Route" : "Save Route" %>
-  <%= button_to button_text, save_route_path(@route), method: :post, class: button_class %>
+    <% if @vehicles.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <% @vehicles.each do |vehicle| %>
+          <div class="info-card">
+            <div class="space-y-2 text-sm">
+              <div class="info-card-row">
+                <span class="info-card-label">Vehicle ID</span>
+                <span class="info-card-value"><%= vehicle.id %></span>
+              </div>
+              <div class="info-card-row">
+                <span class="info-card-label">Status</span>
+                <span class="status-value"><%= "#{vehicle.current_status.capitalize} #{vehicle.stop}" %></span>
+              </div>
+              <div class="info-card-row">
+                <span class="info-card-label">Speed</span>
+                <span class="info-card-value"><%= vehicle.speed %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <svg class="empty-state-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <p>No active vehicles on this route</p>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<p>There are <%= @vehicles.count %> vehicles currently on this route</p>
-
-<div 
-  id="map" 
-  style="height: 360px; width: 720px"
-  data-controller="map"
-  data-vehicles="<%= @vehicles.map{|vehicle| [vehicle.lat, vehicle.lon]}.to_json %>"
-  data-shapes="<%= @shapes.to_json %>"
-></div>
-
-<% @vehicles.each do |vehicle| %>
-  <p><%= vehicle %></p>
-<% end %>

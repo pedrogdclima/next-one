@@ -1,27 +1,29 @@
-<div id="<%= dom_id stop %>">
+<div id="<%= dom_id stop %>" class="space-y-3">
   <div>
-    <strong>Id:</strong>
-    <%= stop.id %>
+    <h3 class="text-lg font-semibold text-gray-900"><%= stop.name %></h3>
   </div>
 
-  <div>
-    <strong>Code:</strong>
-    <%= stop.code %>
+  <div class="detail-fields-grid">
+    <div class="detail-field">
+      <p class="detail-field-label">Stop Code</p>
+      <p class="detail-field-value"><%= stop.code %></p>
+    </div>
+
+    <div class="detail-field">
+      <p class="detail-field-label">Stop ID</p>
+      <p class="detail-field-value"><%= stop.id %></p>
+    </div>
   </div>
 
-  <div>
-    <strong>Name:</strong>
-    <%= stop.name %>
-  </div>
+  <div class="detail-fields-grid border-t border-gray-200 pt-3">
+    <div>
+      <p class="detail-field-label">Latitude</p>
+      <p class="detail-field-value"><%= number_with_precision(stop.lat, precision: 4) %></p>
+    </div>
 
-  <div>
-    <strong>Lat:</strong>
-    <%= stop.lat %>
+    <div>
+      <p class="detail-field-label">Longitude</p>
+      <p class="detail-field-value"><%= number_with_precision(stop.lon, precision: 4) %></p>
+    </div>
   </div>
-
-  <div>
-    <strong>Lon:</strong>
-    <%= stop.lon %>
-  </div>
-
 </div>
