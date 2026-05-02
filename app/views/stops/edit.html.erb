@@ -1,12 +1,17 @@
-<% content_for :title, "Editing stop" %>
+<% content_for :title, "Edit Stop" %>
 
-<h1>Editing stop</h1>
+<div class="container-content-max space-section">
+  <div>
+    <h1 class="page-title">Edit Stop</h1>
+    <p class="page-description">Update transit stop details</p>
+  </div>
 
-<%= render "form", stop: @stop %>
+  <div class="card-lg">
+    <%= render "form", stop: @stop %>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this stop", @stop %> |
-  <%= link_to "Back to stops", stops_path %>
+  <div class="btn-group">
+    <%= link_to "View Stop", @stop, class: "btn-primary" %>
+    <%= link_to "Back to Stops", stops_path, class: "btn-secondary" %>
+  </div>
 </div>

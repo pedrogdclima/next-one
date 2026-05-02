@@ -26,9 +26,83 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex flex-col">
+  <body class="bg-gray-50">
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
+      <div class="container-main">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex-shrink-0">
+            <%= link_to "Next One", routes_path, class: "nav-link-primary" %>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <%= link_to "Routes", routes_path, class: "nav-link" %>
+            <%= link_to "Stops", stops_path, class: "nav-link" %>
+          </div>
+          <div class="md:hidden">
+            <button class="nav-link" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
+          <%= link_to "Routes", routes_path, class: "mobile-nav-link" %>
+          <%= link_to "Stops", stops_path, class: "mobile-nav-link" %>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container-main py-12">
+      <!-- Flash Messages -->
+      <% if notice %>
+        <div class="alert-success">
+          <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          <p><%= notice %></p>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert-error">
+          <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+          </svg>
+          <p><%= alert %></p>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-16 py-8">
+      <div class="container-main">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-white font-semibold mb-4">Next One</h3>
+            <p class="text-sm">A clean and responsive transit information application.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2 text-sm">
+              <li><%= link_to "Routes", routes_path, class: "link-footer" %></li>
+              <li><%= link_to "Stops", stops_path, class: "link-footer" %></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold mb-4">Info</h3>
+            <p class="text-sm">Built with Rails and Tailwind CSS for a modern, responsive experience.</p>
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+          <p>All data provided by TTC. Incorrect information presented here was published as correct by TTC.</p>
+          <p>&copy; 2026 Next One. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

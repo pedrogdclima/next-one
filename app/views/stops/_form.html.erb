@@ -1,42 +1,44 @@
-<%= form_with(model: stop) do |form| %>
+<%= form_with(model: stop, local: true) do |form| %>
   <% if stop.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(stop.errors.count, "error") %> prohibited this stop from being saved:</h2>
-
-      <ul>
+    <div class="form-error">
+      <h2 class="form-error-heading"><%= pluralize(stop.errors.count, "error") %> prohibited this stop from being saved:</h2>
+      <ul class="form-error-list">
         <% stop.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="form-error-item"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :id, style: "display: block" %>
-    <%= form.number_field :id %>
+  <div class="form-grid">
+    <div class="form-group">
+      <%= form.label :id, class: "text-label" %>
+      <%= form.number_field :id, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :code, "Stop Code", class: "text-label" %>
+      <%= form.number_field :code, class: "form-input" %>
+    </div>
+
+    <div class="form-group form-grid-full">
+      <%= form.label :name, "Stop Name", class: "text-label" %>
+      <%= form.text_field :name, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :lat, "Latitude", class: "text-label" %>
+      <%= form.text_field :lat, class: "form-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :lon, "Longitude", class: "text-label" %>
+      <%= form.text_field :lon, class: "form-input" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :code, style: "display: block" %>
-    <%= form.number_field :code %>
-  </div>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :lat, style: "display: block" %>
-    <%= form.text_field :lat %>
-  </div>
-
-  <div>
-    <%= form.label :lon, style: "display: block" %>
-    <%= form.text_field :lon %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit class: "btn-primary" %>
+    <%= link_to "Cancel", stops_path, class: "btn-secondary" %>
   </div>
 <% end %>

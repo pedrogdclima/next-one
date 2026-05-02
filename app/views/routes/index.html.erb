@@ -1,35 +1,44 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Routes" %>
-
-<h1>Routes</h1>
-
-<% if @saved_routes.any? %>
-  <div id="saved-routes">
-    <h2>Your Saved Routes</h2>
-    <div id="saved-routes-list">
-      <% @saved_routes.each do |route_id| %>
-        <% route = Route.find(route_id) %>
-        <%= render route %>
-        <p>
-          <%= link_to "Show this route", route %>
-        </p>
-      <% end %>
+<div class="space-section">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Routes</h1>
+      <p class="page-description">Browse and manage transit routes</p>
     </div>
   </div>
 
-  <hr>
-<% end %>
-
-<h2>All Routes</h2>
-
-<div id="routes">
-  <% @routes.each do |route| %>
-    <%= render route %>
-    <p>
-      <%= link_to "Show this route", route %>
-    </p>
+  <!-- Saved Routes Section -->
+  <% if @saved_routes.any? %>
+    <div id="saved-routes" class="card-blue">
+      <h2 class="section-title-with-icon">
+        <svg class="section-title-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path>
+        </svg>
+        Your Saved Routes
+      </h2>
+      <div id="saved-routes-list" class="grid-cards">
+        <% @saved_routes.each do |route_id| %>
+          <% route = Route.find(route_id) %>
+          <div class="card-hover">
+            <%= render route %>
+            <%= link_to "View Route", route, class: "link-primary mt-3 inline-flex" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</div>
 
-<%= link_to "New route", new_route_path %>
+  <!-- All Routes Section -->
+  <div class="spacing-lg">
+    <h2 class="section-title">All Routes</h2>
+    <div id="routes" class="grid-cards">
+      <% @routes.each do |route| %>
+        <% next if @saved_routes.any?(route.id) %>
+        <div class="card-hover">
+          <%= render route %>
+          <%= link_to "View Route", route, class: "link-primary mt-3 inline-flex" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

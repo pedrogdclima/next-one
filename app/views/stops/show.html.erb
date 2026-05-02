@@ -1,10 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, @stop.name %>
 
-<%= render @stop %>
+<div class="space-section">
+  <!-- Stop Details Card -->
+  <div class="card-lg">
+    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div class="flex-1">
+        <%= render @stop %>
+      </div>
+      <div class="btn-group flex-col">
+        <%= link_to "Edit Stop", edit_stop_path(@stop), class: "btn-primary" %>
+        <%= link_to "Back to Stops", stops_path, class: "btn-secondary" %>
+        <%= button_to "Delete Stop", @stop, method: :delete, data: { confirm: "Are you sure?" }, class: "btn-danger" %>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this stop", edit_stop_path(@stop) %> |
-  <%= link_to "Back to stops", stops_path %>
-
-  <%= button_to "Destroy this stop", @stop, method: :delete %>
+  <!-- Map Section -->
+  <div class="card-lg">
+    <h2 class="section-title mb-4">Stop Location</h2>
+    <div 
+      id="stop-map" 
+      class="map-responsive bg-gray-100 flex items-center justify-center text-gray-500"
+    >
+      <!-- Map will be initialized here if needed -->
+      <div class="text-center">
+        <svg class="empty-state-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 003 16.382V5.618a1 1 0 011.553-.894L9 7m0 0l6.447-3.276A1 1 0 0117 5.618v10.764a1 1 0 01-1.553.894L9 13m0 0l-6.447 3.276M9 13v7m0 0l6.447-3.276m0 0A1 1 0 0017 16.382v-10.764"></path>
+        </svg>
+        <p>Latitude: <%= number_with_precision(@stop.lat, precision: 4) %></p>
+        <p>Longitude: <%= number_with_precision(@stop.lon, precision: 4) %></p>
+      </div>
+    </div>
+  </div>
 </div>
