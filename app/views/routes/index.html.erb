@@ -7,17 +7,17 @@
     </div>
   </div>
 
-  <!-- Saved Routes Section -->
-  <% if @saved_routes.any? %>
-    <div id="saved-routes" class="card-blue">
+  <!-- Starred Routes Section -->
+  <% if @starred_routes.any? %>
+    <div id="starred-routes" class="card-blue">
       <h2 class="section-title-with-icon">
         <svg class="section-title-icon" fill="currentColor" viewBox="0 0 20 20">
           <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path>
         </svg>
-        Your Saved Routes
+        Starred Routes
       </h2>
-      <div id="saved-routes-list" class="grid-cards">
-        <% @saved_routes.each do |route_id| %>
+      <div id="starred-routes-list" class="grid-cards">
+        <% @starred_routes.each do |route_id| %>
           <% route = Route.find(route_id) %>
           <div class="card-hover">
             <%= render route %>
@@ -33,7 +33,7 @@
     <h2 class="section-title">All Routes</h2>
     <div id="routes" class="grid-cards">
       <% @routes.each do |route| %>
-        <% next if @saved_routes.any?(route.id) %>
+        <% next if @starred_routes.any?(route.id) %>
         <div class="card-hover">
           <%= render route %>
           <%= link_to "View Route", route, class: "link-primary mt-3 inline-flex" %>

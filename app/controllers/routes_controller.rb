@@ -1,30 +1,30 @@
 class RoutesController < ApplicationController
-  # before_action :set_route, only: %i[ show edit update destroy save ]
-  before_action :set_route, only: %i[ show save ]
+  # before_action :set_route, only: %i[ show edit update destroy star ]
+  before_action :set_route, only: %i[ show star ]
 
   # GET /routes or /routes.json
   def index
     @routes = Route.all
-    @saved_routes = session[:saved_routes] || []
+    @starred_routes = session[:starred_routes] || []
   end
 
   # GET /routes/1 or /routes/1.json
   def show
     @vehicles = Vehicle.on_route(@route.id)
     @shapes = Shape.for_vehicles(@vehicles)
-    @is_saved = route_saved?(@route.id)
+    @is_starred = route_starred?(@route.id)
   end
 
-  # POST /routes/1/save_route
-  def save
-    session[:saved_routes] ||= []
+  # POST /routes/1/star
+  def star
+    session[:starred_routes] ||= []
     
-    if session[:saved_routes].include?(@route.id)
-      session[:saved_routes].delete(@route.id)
-      message = "Route removed from saved routes."
+    if session[:starred_routes].include?(@route.id)
+      session[:starred_routes].delete(@route.id)
+      message = "Route removed from starred routes."
     else
-      session[:saved_routes] << @route.id
-      message = "Route saved successfully!"
+      session[:starred_routes] << @route.id
+      message = "Route starred successfully!"
     end
 
     respond_to do |format|
@@ -91,8 +91,8 @@ class RoutesController < ApplicationController
       params.expect(route: [ :id, :short_name, :long_name, :type ])
     end
 
-    # Check if a route is saved in the current session
-    def route_saved?(route_id)
-      (session[:saved_routes] || []).include?(route_id)
+    # Check if a route is starred in the current session
+    def route_starred?(route_id)
+      (session[:starred_routes] || []).include?(route_id)
     end
 end
