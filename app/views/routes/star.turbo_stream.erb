@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "star-button" do %>
+    <div id="star-button">
+        <%= button_to @is_starred ? "★" : "☆", star_route_path(@route), method: :post, class: "btn #{@is_starred ? "btn-starred" : "btn-unstarred"}" %>
+    </div>
+<% end %>

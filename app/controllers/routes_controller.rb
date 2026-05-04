@@ -22,14 +22,17 @@ class RoutesController < ApplicationController
     if session[:starred_routes].include?(@route.id)
       session[:starred_routes].delete(@route.id)
       message = "Route removed from starred routes."
+      @is_starred = false
     else
       session[:starred_routes] << @route.id
       message = "Route starred successfully!"
+      @is_starred = true
     end
 
     respond_to do |format|
       format.html { redirect_to @route, notice: message }
       format.turbo_stream
+      format.json { render json: { starred: is_starred, message: message } }
     end
   end
 
