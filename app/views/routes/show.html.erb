@@ -9,9 +9,9 @@
       </div>
       <div class="btn-group flex-col">
         <%= link_to "Back to Routes", routes_path, class: "btn-secondary" %>
-        <% button_class = "btn " + (@is_saved ? "btn-saved" : "btn-primary") %>
-        <% button_text = @is_saved ? "❤ Saved" : "♡ Save Route" %>
-        <%= button_to button_text, save_route_path(@route), method: :post, class: button_class %>
+        <% button_class = "btn " + (@is_starred ? "btn-starred" : "btn-primary") %>
+        <% button_text = @is_starred ? "❤ Starred" : "♡ Star Route" %>
+        <%= button_to button_text, star_route_path(@route), method: :post, class: button_class %>
       </div>
     </div>
   </div>
