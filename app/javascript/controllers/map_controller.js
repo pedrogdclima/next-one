@@ -25,9 +25,17 @@ export default class extends Controller {
     }).addTo(this.map)
 
     // Add vehicle markers
+    const vehicleIcon = L.icon({
+      iconUrl: '/Vehicle_Icon.png',
+      iconSize: [16, 32],
+      iconAnchor: [0, 0],
+      popupAnchor: [-5, -5],
+    })
+
     const vehicles = JSON.parse(this.element.dataset.vehicles || '[]')
+    
     vehicles.forEach((vehicle) => {
-      L.marker(vehicle).addTo(this.map)
+      L.marker(vehicle.coord, {icon: vehicleIcon, rotationAngle: vehicle.bearing}).addTo(this.map)
     })
 
     // Add route polyline

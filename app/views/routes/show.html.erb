@@ -18,7 +18,7 @@
       id="map" 
       class="map-responsive"
       data-controller="map"
-      data-vehicles="<%= @vehicles.map{|vehicle| [vehicle.lat, vehicle.lon]}.to_json %>"
+      data-vehicles="<%= @vehicles.map{|vehicle| {coord: [vehicle.lat, vehicle.lon], bearing: vehicle.bearing} }.to_json %>"
       data-shapes="<%= @shapes.to_json %>"
     ></div>
   </div>
@@ -51,6 +51,10 @@
               <div class="info-card-row">
                 <span class="info-card-label">Speed</span>
                 <span class="info-card-value"><%= vehicle.speed %></span>
+              </div>
+              <div class="info-card-row">
+                <span class="info-card-label">Bearing</span>
+                <span class="info-card-value"><%= vehicle.bearing %></span>
               </div>
             </div>
           </div>
