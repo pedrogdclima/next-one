@@ -9,22 +9,13 @@
 
   <!-- Starred Routes Section -->
   <% if @starred_routes.any? %>
-    <div id="starred-routes" class="card-blue">
-      <h2 class="section-title-with-icon">
-        <svg class="section-title-icon" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path>
-        </svg>
-        Starred Routes
-      </h2>
-      <div id="starred-routes-list" class="grid-cards">
-        <% @starred_routes.each do |route_id| %>
-          <% route = Route.find(route_id) %>
-          <div class="card-hover">
-            <%= render route %>
-            <%= link_to "View Route", route, class: "link-primary mt-3 inline-flex" %>
-          </div>
+    <div id="starred-routes-list" class="grid-cards">
+      <% @starred_routes.each do |route_id| %>
+        <% route = Route.find(route_id) %>
+        <%= link_to route, class: "card-hover-starred" do %>
+          <%= render route %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   <% end %>
 
@@ -34,10 +25,10 @@
     <div id="routes" class="grid-cards">
       <% @routes.each do |route| %>
         <% next if @starred_routes.any?(route.id) %>
-        <div class="card-hover">
+        <% next if Route.ignore.any?(route.id)%>
+        <%= link_to route, class: "card-hover" do %>
           <%= render route %>
-          <%= link_to "View Route", route, class: "link-primary mt-3 inline-flex" %>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>
