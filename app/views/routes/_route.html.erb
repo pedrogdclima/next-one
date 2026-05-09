@@ -1,5 +1,6 @@
 <div id="<%= dom_id route %>" class="space-y-2">
   <h3 class="text-lg font-semibold text-gray-900">
+    <%= @starred_routes.include?(route.id) ? '★' : '' %>
     <%= "#{route.short_name} - #{route.long_name}" %>
   </h3>
 </div>
