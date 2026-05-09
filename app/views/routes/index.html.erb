@@ -19,9 +19,13 @@
     </div>
   <% end %>
 
+  <!-- List Routes by service type -->
+  <div id="route-list">
+    <%# button_to @is_starred ? "★" : "☆", star_route_path(@route), method: :post, class: "btn #{@is_starred ? "btn-starred" : "btn-unstarred"}" %>
+  </div>
+
   <!-- All Routes Section -->
   <div class="spacing-lg">
-    <h2 class="section-title">All Routes</h2>
     <div id="routes" class="grid-cards">
       <% @routes.each do |route| %>
         <% next if @starred_routes.any?(route.id) %>
