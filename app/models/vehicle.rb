@@ -34,6 +34,10 @@ class Vehicle
         Stop.find_by(id: self.stop_id)&.name || 'no info'
     end
 
+    def self.timestamp
+        @@timestamp
+    end
+
     def self.on_route(route_id)
         vehicles = self.fetch_vehicles
         vehicles.select { |vehicle| vehicle.route_id == route_id.to_s }

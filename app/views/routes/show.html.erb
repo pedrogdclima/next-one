@@ -31,7 +31,7 @@
       </svg>
       <h2 class="section-title">Active Vehicles</h2>
       <span class="badge-count">
-        <%= @vehicles.count %>
+        <%= Time.now.to_i - Vehicle.timestamp %> seconds ago
       </span>
     </div>
 
