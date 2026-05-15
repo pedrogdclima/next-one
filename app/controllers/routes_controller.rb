@@ -8,6 +8,23 @@ class RoutesController < ApplicationController
     @starred_routes = session[:starred_routes] || []
   end
 
+  # GET /routes/filter_by_mode
+  def filter_by_mode
+    @starred_routes = session[:starred_routes] || []
+    mode = params[:mode]
+    
+    @routes = case mode
+    when "0"
+      Route.where.not(id: (299..400)).where(mode_type: 0)
+    when "3"
+      Route.where.not(id: (299..400)).where(mode_type: 3)
+    when "night"
+      Route.where(id: (299..400))
+    else
+      Route.all
+    end
+  end
+
   # GET /routes/1 or /routes/1.json
   def show
     @vehicles = Vehicle.on_route(@route.id)

@@ -19,21 +19,13 @@
     </div>
   <% end %>
 
-  <!-- List Routes by service type -->
-  <div id="route-list">
-    <%# button_to @is_starred ? "★" : "☆", star_route_path(@route), method: :post, class: "btn #{@is_starred ? "btn-starred" : "btn-unstarred"}" %>
-  </div>
-
-  <!-- All Routes Section -->
-  <div class="spacing-lg">
-    <div id="routes" class="grid-cards">
-      <% @routes.each do |route| %>
-        <% next if @starred_routes.any?(route.id) %>
-        <% next if Route.ignore.any?(route.id)%>
-        <%= link_to route, class: "card-hover" do %>
-          <%= render route %>
-        <% end %>
-      <% end %>
+  <!-- Other routes cards -->
+  <%= turbo_frame_tag "other-routes" do %>
+    <!-- Buttons to filter routes by mode type -->
+    <div id="mode-filter-buttons" class="flex gap-2 my-4">
+      <%= link_to "Bus", filter_by_mode_routes_path(mode: "3"), class: "btn-secondary" %>
+      <%= link_to "Streetcar", filter_by_mode_routes_path(mode: "0"), class: "btn-secondary" %>
+      <%= link_to "Blue Night Network", filter_by_mode_routes_path(mode: "night"), class: "btn-secondary" %>
     </div>
-  </div>
+  <% end %>
 </div>

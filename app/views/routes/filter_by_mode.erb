@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "other-routes" do %>
+    <!-- Buttons to filter routes by mode type -->
+    <div id="mode-filter-buttons" class="flex gap-2 my-4">
+        <%= link_to "Bus", filter_by_mode_routes_path(mode: "3"), class: "btn-secondary" %>
+        <%= link_to "Streetcar", filter_by_mode_routes_path(mode: "0"), class: "btn-secondary" %>
+        <%= link_to "Blue Night Network", filter_by_mode_routes_path(mode: "night"), class: "btn-secondary" %>
+    </div>
+
+    <%= render "routes_list" %>
+<% end %>
