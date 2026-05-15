@@ -3,6 +3,9 @@ Rails.application.routes.draw do
     member do
       post :star
     end
+    collection do
+      get :filter_by_mode
+    end
   end
   # resources :stops
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
