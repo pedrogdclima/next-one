@@ -8,6 +8,7 @@
         <%= button_to @is_starred ? "★" : "☆", star_route_path(@route), method: :post, class: "btn #{@is_starred ? "btn-starred" : "btn-unstarred"}" %>
       </div>
       <h1 class="page-title"><%= "#{@route.short_name} - #{@route.long_name}" %></h1>
+      <%== modeTypeIcon %>
     </div>
   </div>
 
