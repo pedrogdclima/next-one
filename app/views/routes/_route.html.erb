@@ -1,22 +1,5 @@
 <div id="<%= dom_id route %>">
   <div>
-    <strong>Id:</strong>
-    <%= route.id %>
+    <strong><%= "#{route.short_name} - #{route.long_name}" %></strong>
   </div>
-
-  <div>
-    <strong>Short name:</strong>
-    <%= route.short_name %>
-  </div>
-
-  <div>
-    <strong>Long name:</strong>
-    <%= route.long_name %>
-  </div>
-
-  <div>
-    <strong>Mode Type:</strong>
-    <%= route.mode_type %>
-  </div>
-
 </div>
