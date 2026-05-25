@@ -7,11 +7,6 @@
       <div class="flex-1">
         <%= render @stop %>
       </div>
-      <div class="btn-group flex-col">
-        <%= link_to "Edit Stop", edit_stop_path(@stop), class: "btn-primary" %>
-        <%= link_to "Back to Stops", stops_path, class: "btn-secondary" %>
-        <%= button_to "Delete Stop", @stop, method: :delete, data: { confirm: "Are you sure?" }, class: "btn-danger" %>
-      </div>
     </div>
   </div>
 
