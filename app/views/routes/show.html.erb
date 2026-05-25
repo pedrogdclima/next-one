@@ -1,20 +1,18 @@
-<%# content_for :title, "#{@route.short_name} - #{@route.long_name}" %>
 
 <div class="space-section">
   <!-- Route Header -->
-  <div class="card-lg">
-    <div class="flex flex-row items-start gap-4">
+  <div class="title-card">
+    <div class="flex flex-row items-center gap-4">
       <div id="star-button">
         <%= button_to @is_starred ? "★" : "☆", star_route_path(@route), method: :post, class: "btn #{@is_starred ? "btn-starred" : "btn-unstarred"}" %>
       </div>
-      <h1 class="page-title"><%= "#{@route.short_name} - #{@route.long_name}" %></h1>
-      <%== modeTypeIcon %>
+      <h1 class="page-title truncate"><%= "#{@route.short_name} - #{@route.long_name}" %></h1>
+      <%# modeTypeIcon %>
     </div>
   </div>
 
   <!-- Map Section -->
   <div class="card-lg overflow-hidden">
-    <h2 class="section-title mb-4">Route Map</h2>
     <div 
       id="map" 
       class="map-responsive"
@@ -27,10 +25,7 @@
   <!-- Active Vehicles Section -->
   <div class="card-lg">
     <div class="flex items-center mb-4">
-      <svg class="section-title-icon" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M13 7H7v6h6V7z"></path>
-      </svg>
-      <h2 class="section-title">Active Vehicles</h2>
+      <h2 class="section-title">Vehicles</h2>
       <span class="badge-count">
         <%= Time.now.to_i - Vehicle.timestamp %> seconds ago
       </span>
@@ -42,20 +37,17 @@
           <div class="info-card">
             <div class="space-y-2 text-sm">
               <div class="info-card-row">
-                <span class="info-card-label">Vehicle ID</span>
+                <span class="info-card-label">ID</span>
                 <span class="info-card-value"><%= vehicle.id %></span>
-              </div>
-              <div class="info-card-row">
-                <span class="info-card-label">Status</span>
-                <span class="status-value"><%= "#{vehicle.current_status.capitalize} #{vehicle.stop}" %></span>
-              </div>
-              <div class="info-card-row">
+                <span>|</span>
                 <span class="info-card-label">Speed</span>
-                <span class="info-card-value"><%= vehicle.speed %></span>
+                <span class="info-card-value"><%= vehicle.speed %> km/h</span>
+                <span>|</span>
+                <span class="info-card-label">Bearing</span>
+                <span class="info-card-value"><%= vehicle.bearing %>&#176</span>
               </div>
               <div class="info-card-row">
-                <span class="info-card-label">Bearing</span>
-                <span class="info-card-value"><%= vehicle.bearing %></span>
+                <span class="status-value"><%= "#{vehicle.current_status.capitalize} #{vehicle.stop}" %></span>
               </div>
             </div>
           </div>
