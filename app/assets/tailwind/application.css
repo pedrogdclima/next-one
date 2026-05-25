@@ -39,10 +39,6 @@
   @apply inline-flex items-center px-4 py-2 font-medium rounded-lg transition-colors border border-gray-300 text-gray-700 hover:bg-gray-50;
 }
 
-.btn-danger {
-  @apply inline-flex items-center px-4 py-2 font-medium rounded-lg transition-colors bg-red-600 text-white hover:bg-red-700;
-}
-
 .btn-unstarred {
   @apply inline-flex items-center px-4 py-2 font-medium rounded-lg transition-colors bg-gray-300 text-white hover:bg-gray-400;
 }
@@ -64,8 +60,12 @@
   @apply bg-white rounded-lg border border-gray-200 p-6;
 }
 
+.title-card {
+  @apply bg-white rounded-lg border border-gray-200 p-6;
+}
+
 .card-hover {
-  @apply bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow;
+  @apply bg-white max-h-fit rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow;
 }
 
 .card-hover-starred {
@@ -84,43 +84,6 @@
 /* Text Elements */
 .text-label {
   @apply block text-sm font-semibold text-gray-900;
-}
-
-/* Form Elements */
-.form-input {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none;
-}
-
-.form-group {
-  @apply space-y-2;
-}
-
-.form-grid {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-6;
-}
-
-.form-grid-full {
-  @apply md:col-span-2;
-}
-
-.form-actions {
-  @apply mt-6 flex gap-3;
-}
-
-.form-error {
-  @apply mb-6 p-4 bg-red-50 border border-red-200 rounded-lg;
-}
-
-.form-error-heading {
-  @apply text-lg font-semibold text-red-900 mb-3;
-}
-
-.form-error-list {
-  @apply space-y-2;
-}
-
-.form-error-item {
-  @apply text-red-800 text-sm;
 }
 
 /* Alert Messages */
@@ -171,28 +134,15 @@
 
 /* Grids and Layouts */
 .grid-cards {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+}
+
+.grid-routes {
+  @apply grid grid-cols-1 gap-4 content-start;
 }
 
 .space-section {
   @apply space-y-8;
-}
-
-/* Detail Card Fields */
-.detail-field {
-  @apply bg-gray-50 p-3 rounded;
-}
-
-.detail-field-label {
-  @apply text-gray-600 text-xs uppercase tracking-wide font-semibold;
-}
-
-.detail-field-value {
-  @apply text-gray-900 font-mono;
-}
-
-.detail-fields-grid {
-  @apply grid grid-cols-2 gap-4 text-sm;
 }
 
 /* Badges and Status */
@@ -200,16 +150,8 @@
   @apply inline-block px-3 py-1 text-xs font-semibold rounded-full;
 }
 
-.badge-blue {
-  @apply inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full;
-}
-
 .badge-count {
   @apply inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full ml-auto;
-}
-
-.status-active {
-  @apply inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded font-semibold;
 }
 
 /* Vehicle/Info Cards */
