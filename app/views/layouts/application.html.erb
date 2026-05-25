@@ -80,26 +80,10 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 mt-16 py-8">
       <div class="container-main">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 class="text-white font-semibold mb-4">Next One</h3>
-            <p class="text-sm">A clean and responsive transit information application.</p>
-          </div>
-          <div>
-            <h3 class="text-white font-semibold mb-4">Quick Links</h3>
-            <ul class="space-y-2 text-sm">
-              <li><%= link_to "Routes", routes_path, class: "link-footer" %></li>
-              <li><%# link_to "Stops", stops_path, class: "link-footer" %></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-white font-semibold mb-4">Info</h3>
-            <p class="text-sm">Built with Rails and Tailwind CSS for a modern, responsive experience.</p>
-          </div>
-        </div>
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
-          <p>All data provided by TTC. Incorrect information presented here was published as correct by TTC.</p>
+        <div class="text-center text-sm">
+          <p>All transit data is provided by the Toronto Transit Commission.</p>
           <p>&copy; 2026 Next One. All rights reserved.</p>
+          <p>Built by <a href="https://pedrogdclima.github.io/">Pedro Lima</a>.</p>
         </div>
       </div>
     </footer>
