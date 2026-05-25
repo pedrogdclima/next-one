@@ -56,7 +56,19 @@ class Vehicle
             if entity.field?(:vehicle)
                 info = entity.vehicle
                 next unless info.field?(:trip)
-                @@vehicles.push(Vehicle.new(info.vehicle.id, info.trip.trip_id, info.trip.route_id, info.current_stop_sequence, STATUS_NAMES[info.current_status], info.timestamp, info.stop_id, info.position.latitude, info.position.longitude, info.position.bearing, info.position.speed))
+                @@vehicles.push(Vehicle.new(
+                    info.vehicle.id,
+                    info.trip.trip_id,
+                    info.trip.route_id,
+                    info.current_stop_sequence,
+                    STATUS_NAMES[info.current_status],
+                    info.timestamp,
+                    info.stop_id,
+                    info.position.latitude,
+                    info.position.longitude,
+                    info.position.bearing,
+                    info.position.speed
+                ))
             end
         end
         @@vehicles
