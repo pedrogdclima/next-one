@@ -244,7 +244,7 @@
 }
 
 .map-responsive {
-  @apply w-full h-96 sm:h-[500px] rounded-lg;
+  @apply w-full h-96 sm:h-[500px] rounded-lg z-0;
 }
 
 /* Spacing Utilities */
