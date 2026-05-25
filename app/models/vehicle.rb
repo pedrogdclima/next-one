@@ -47,10 +47,11 @@ class Vehicle
     def self.fetch_vehicles
         data = Net::HTTP.get(URI.parse(@@url))
         feed = Transit_realtime::FeedMessage.decode(data)
-        if feed.header.timestamp <= @@timestamp
+        if @@timestamp >= feed.header.timestamp
             return @@vehicles
         end
         @@vehicles.clear
+        @@timestamp = feed.header.timestamp
         for entity in feed.entity do
             if entity.field?(:vehicle)
                 info = entity.vehicle
