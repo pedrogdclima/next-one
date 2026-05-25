@@ -30,6 +30,14 @@ class Vehicle
         "#{self.id} is #{self.current_status} #{Stop.find_by(id: self.stop_id)&.name || 'no info'}, at #{self.speed} km/hr"
     end
 
+    def stop
+        Stop.find_by(id: self.stop_id)&.name || 'no info'
+    end
+
+    def self.timestamp
+        @@timestamp
+    end
+
     def self.on_route(route_id)
         vehicles = self.fetch_vehicles
         vehicles.select { |vehicle| vehicle.route_id == route_id.to_s }
@@ -39,15 +47,28 @@ class Vehicle
     def self.fetch_vehicles
         data = Net::HTTP.get(URI.parse(@@url))
         feed = Transit_realtime::FeedMessage.decode(data)
-        if feed.header.timestamp <= @@timestamp
+        if @@timestamp >= feed.header.timestamp
             return @@vehicles
         end
         @@vehicles.clear
+        @@timestamp = feed.header.timestamp
         for entity in feed.entity do
             if entity.field?(:vehicle)
                 info = entity.vehicle
                 next unless info.field?(:trip)
-                @@vehicles.push(Vehicle.new(info.vehicle.id, info.trip.trip_id, info.trip.route_id, info.current_stop_sequence, STATUS_NAMES[info.current_status], info.timestamp, info.stop_id, info.position.latitude, info.position.longitude, info.position.bearing, info.position.speed))
+                @@vehicles.push(Vehicle.new(
+                    info.vehicle.id,
+                    info.trip.trip_id,
+                    info.trip.route_id,
+                    info.current_stop_sequence,
+                    STATUS_NAMES[info.current_status],
+                    info.timestamp,
+                    info.stop_id,
+                    info.position.latitude,
+                    info.position.longitude,
+                    info.position.bearing,
+                    info.position.speed
+                ))
             end
         end
         @@vehicles

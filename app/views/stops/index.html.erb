@@ -1,16 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Stops" %>
 
-<h1>Stops</h1>
+<div class="space-section">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Stops</h1>
+      <p class="page-description">Explore all transit stops</p>
+    </div>
+    <%= link_to "New Stop", new_stop_path, class: "btn-primary-lg" %>
+  </div>
 
-<div id="stops">
-  <% @stops.each do |stop| %>
-    <%= render stop %>
-    <p>
-      <%= link_to "Show this stop", stop %>
-    </p>
-  <% end %>
+  <!-- Stops List -->
+  <div id="stops" class="grid-cards">
+    <% @stops.each do |stop| %>
+      <div class="card-hover">
+        <%= render stop %>
+        <%= link_to "View Stop", stop, class: "link-primary mt-4 inline-flex" %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New stop", new_stop_path %>

@@ -10,7 +10,6 @@
     <%= csp_meta_tag %>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <%= yield :head %>
 
@@ -26,9 +25,48 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex flex-col">
+  <body class="bg-gray-50">
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 bg-white shadow-md border-b border-gray-200 z-10">
+      <div class="container-main">
+        <div class="flex justify-between items-center h-16">
+            <%= link_to "Next One", routes_path, class: "nav-link-primary" %>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container-main py-12">
+      <!-- Flash Messages -->
+      <% if notice %>
+        <div class="alert-success">
+          <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          <p><%= notice %></p>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert-error">
+          <svg class="alert-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+          </svg>
+          <p><%= alert %></p>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-16 py-8">
+      <div class="container-main">
+        <div class="text-center text-sm">
+          <p>All transit data is provided by the Toronto Transit Commission.</p>
+          <p>&copy; 2026 Next One. All rights reserved.</p>
+          <p>Built by <a href="https://pedrogdclima.github.io/">Pedro Lima</a>.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

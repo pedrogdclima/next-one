@@ -1,0 +1,9 @@
+<div id="routes-list" class="grid-cards">
+  <% @routes.each do |route| %>
+    <% next if @starred_routes.include?(route.id) %>
+    <% next if Route.ignore.any? { |r| r == route.id } %>
+    <%= link_to route, class: "card-hover", data: { turbo: "false" } do %>
+      <%= render route %>
+    <% end %>
+  <% end %>
+</div>
