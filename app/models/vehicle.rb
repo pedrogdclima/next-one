@@ -1,4 +1,4 @@
-require 'google/transit/gtfs-realtime.pb'
+require "google/transit/gtfs-realtime.pb"
 
 class Vehicle
     attr_accessor :id, :trip_id, :route_id, :current_stop_sequence, :current_status, :timestamp, :stop_id, :lat, :lon, :bearing, :speed
@@ -7,9 +7,9 @@ class Vehicle
     @@vehicles = []
 
     STATUS_NAMES = {
-        0 => 'incoming at',
-        1 => 'in transit to',
-        2 => 'stopped at'
+        0 => "incoming at",
+        1 => "in transit to",
+        2 => "stopped at"
     }.freeze
 
     def initialize(id, trip_id, route_id, current_stop_sequence, current_status, timestamp, stop_id, lat, lon, bearing, speed)
@@ -31,7 +31,7 @@ class Vehicle
     end
 
     def stop
-        Stop.find_by(id: self.stop_id)&.name || 'no info'
+        Stop.find_by(id: self.stop_id)&.name || "no info"
     end
 
     def self.timestamp

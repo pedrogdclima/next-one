@@ -12,7 +12,6 @@ class RoutesController < ApplicationController
   def filter_by_mode
     @starred_routes = session[:starred_routes] || []
     mode = params[:mode]
-    
     @routes = case mode
     when "0"
       Route.where.not(id: (299..400)).where(mode_type: 0)
@@ -35,7 +34,6 @@ class RoutesController < ApplicationController
   # POST /routes/1/star
   def star
     session[:starred_routes] ||= []
-    
     if session[:starred_routes].include?(@route.id)
       session[:starred_routes].delete(@route.id)
       message = "Route removed from starred routes."

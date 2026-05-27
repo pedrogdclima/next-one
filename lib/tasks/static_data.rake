@@ -1,14 +1,13 @@
 namespace :static_data do
-
     desc "Add all TTC Routes"
     task add_routes: :environment do
         routes_to_insert = []
-        CSV.foreach(File.join(Rails.root, 'data', 'schedule', 'routes.txt'), headers: true) do |row|
+        CSV.foreach(File.join(Rails.root, "data", "schedule", "routes.txt"), headers: true) do |row|
             routes_to_insert << {
-                id: row['route_id'],
-                short_name: row['route_short_name'],
-                long_name: row['route_long_name'],
-                mode_type: row['route_type']
+                id: row["route_id"],
+                short_name: row["route_short_name"],
+                long_name: row["route_long_name"],
+                mode_type: row["route_type"]
             }
         end
         Route.insert_all(routes_to_insert)
@@ -17,13 +16,13 @@ namespace :static_data do
     desc "Add all TTC Stops"
     task add_stops: :environment do
         stops_to_insert = []
-        CSV.foreach(File.join(Rails.root, 'data', 'schedule', 'stops.txt'), headers: true) do |row|
+        CSV.foreach(File.join(Rails.root, "data", "schedule", "stops.txt"), headers: true) do |row|
             stops_to_insert << {
-                id: row['stop_id'],
-                code: row['stop_code'],
-                name: row['stop_name'],
-                lat: row['stop_lat'],
-                lon: row['stop_lon']
+                id: row["stop_id"],
+                code: row["stop_code"],
+                name: row["stop_name"],
+                lat: row["stop_lat"],
+                lon: row["stop_lon"]
             }
             if stops_to_insert.size >= 5000
                 Stop.insert_all(stops_to_insert)
@@ -38,9 +37,8 @@ namespace :static_data do
         existing_shapes = Set.new(Shape.pluck(:id))
         points_to_insert = []
 
-        CSV.foreach(File.join(Rails.root, 'data', 'schedule', 'shapes.txt'), headers: true) do |row|
-            shape_id = row['shape_id']
-            
+        CSV.foreach(File.join(Rails.root, "data", "schedule", "shapes.txt"), headers: true) do |row|
+            shape_id = row["shape_id"]
             unless existing_shapes.include?(shape_id)
                 Shape.create! id: shape_id
                 existing_shapes.add(shape_id)
@@ -48,10 +46,10 @@ namespace :static_data do
 
             points_to_insert << {
                 shape_id: shape_id,
-                lat: row['shape_pt_lat'],
-                lon: row['shape_pt_lon'],
-                sequence: row['shape_pt_sequence'],
-                dist_travelled: row['shape_dist_traveled']
+                lat: row["shape_pt_lat"],
+                lon: row["shape_pt_lon"],
+                sequence: row["shape_pt_sequence"],
+                dist_travelled: row["shape_dist_traveled"]
             }
 
             if points_to_insert.size >= 5000
@@ -66,14 +64,14 @@ namespace :static_data do
     desc "Add all TTC Trips"
     task add_trips: :environment do
         trips_to_insert = []
-        CSV.foreach(File.join(Rails.root, 'data', 'schedule', 'trips.txt'), headers: true) do |row|
+        CSV.foreach(File.join(Rails.root, "data", "schedule", "trips.txt"), headers: true) do |row|
             trips_to_insert << {
-                id: row['trip_id'],
-                route_id: row['route_id'],
-                service_id: row['service_id'],
-                headsign: row['trip_headsign'],
-                direction_id: row['direction_id'],
-                shape_id: row['shape_id']
+                id: row["trip_id"],
+                route_id: row["route_id"],
+                service_id: row["service_id"],
+                headsign: row["trip_headsign"],
+                direction_id: row["direction_id"],
+                shape_id: row["shape_id"]
             }
 
             if trips_to_insert.size >= 5000
@@ -95,7 +93,7 @@ namespace :static_data do
 
     desc "Add all TTC Schedule data"
     task add_all: :environment do
-        ['routes', 'stops', 'shapes', 'trips'].each do |data_name|
+        [ "routes", "stops", "shapes", "trips" ].each do |data_name|
             task_name = "static_data:add_#{data_name}"
             puts "Starting #{task_name}"
             Rake::Task[task_name].execute

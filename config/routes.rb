@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :routes, only: [:index, :show] do
+  resources :routes, only: [ :index, :show ] do
     member do
       post :star
     end
