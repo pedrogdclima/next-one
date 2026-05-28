@@ -17,6 +17,7 @@
       id="map" 
       class="map-responsive"
       data-controller="map"
+      data-icon-url="<%= asset_path('vehicle_icon.png') %>"
       data-vehicles="<%= @vehicles.map{|vehicle| {coord: [vehicle.lat, vehicle.lon], bearing: vehicle.bearing} }.to_json %>"
       data-shapes="<%= @shapes.to_json %>"
     ></div>

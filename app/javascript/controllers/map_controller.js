@@ -26,7 +26,7 @@ export default class extends Controller {
 
     // Add vehicle markers
     const vehicleIcon = L.icon({
-      iconUrl: '/Vehicle_Icon.png',
+      iconUrl: this.element.dataset.iconUrl,
       iconSize: [16, 32],
       iconAnchor: [0, 0],
       popupAnchor: [-5, -5],
