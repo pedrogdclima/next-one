@@ -77,4 +77,4 @@ gem "gtfs-realtime-bindings", "~> 0.0.5"
 
 gem "net-http", "~> 0.9.1"
 
-gem "tailwindcss-rails", "~> 4.4"
+gem "tailwindcss-rails", "~> 4.6"
